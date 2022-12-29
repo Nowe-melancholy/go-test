@@ -23,5 +23,17 @@ services:
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
       POSTGRES_DB: "db"
       TZ: "Asia/Tokyo"
+  pgadmin4:
+    image: dpage/pgadmin4
+    ports:
+        - 8888:80
+    volumes:
+        - pgadmin4_data:/var/lib/pgadmin
+    environment:
+        PGADMIN_DEFAULT_EMAIL: hoge@gmail.com
+        PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - db
 volumes:
   go-db:
+  pgadmin4_data:
