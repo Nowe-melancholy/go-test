@@ -1,0 +1,12 @@
+input CreateLIdInput {
+  l_id: Int!
+}
+
+input CreateDIdInput {
+  d_id: Int!
+}
+
+type Mutation {
+  createL(input: CreateLIdInput!): Int!
+  createD(input: CreateDIdInput!): Int!
+}
