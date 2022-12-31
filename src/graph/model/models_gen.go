@@ -2,10 +2,6 @@
 
 package model
 
-type CreateDIdInput struct {
-	DID int `json:"d_id"`
-}
-
 type CreateLIdInput struct {
 	LID int `json:"l_id"`
 }

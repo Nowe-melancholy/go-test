@@ -6,18 +6,17 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"go-test/graph/model"
+	middlewareRepo "go-test/repos"
+	createLUsecase "go-test/usecase"
 )
 
 // CreateL is the resolver for the createL field.
 func (r *mutationResolver) CreateL(ctx context.Context, input model.CreateLIdInput) (int, error) {
-	panic(fmt.Errorf("not implemented: CreateL - createL"))
-}
-
-// CreateD is the resolver for the createD field.
-func (r *mutationResolver) CreateD(ctx context.Context, input model.CreateDIdInput) (int, error) {
-	panic(fmt.Errorf("not implemented: CreateD - createD"))
+	repo := middlewareRepo.NewMiddlewareRepo()
+	usecase := createLUsecase.NewCreateLUsecase(repo)
+	result, err := usecase.CreateL(ctx, input.LID)
+	return result, err
 }
 
 // Mutation returns MutationResolver implementation.
