@@ -18,7 +18,12 @@ func main() {
 	}
 	defer client.Close()
 	ctx := context.Background()
-	if err := client.Schema.Create(ctx, migrate.WithForeignKeys(false)); err != nil {
+	if err := client.Schema.Create(
+		ctx,
+		migrate.WithForeignKeys(false),
+		migrate.WithDropIndex(true),
+		migrate.WithDropColumn(true),
+	); err != nil {
 		log.Fatalf("failed printing schema changes: %v", err)
 	}
 	log.Print("ent migrate done.")

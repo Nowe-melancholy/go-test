@@ -5,7 +5,8 @@ import (
 	"fmt"
 	iMiddlewareRepo "go-test/domain/interface"
 	"go-test/ent"
-	"strconv"
+
+	_ "github.com/lib/pq"
 )
 
 type middlewareRepo struct{}
@@ -23,7 +24,12 @@ func (repo *middlewareRepo) CreateL(ctx context.Context, lId int) (int, error) {
 	}
 
 	defer client.Close()
-	middleware, err := client.Debug().Middleware.Create().SetLID(strconv.Itoa(lId)).Save(ctx)
+	middleware, err := client.Debug().Middleware.
+		Create().
+		SetLID(lId).
+		SetNillableDID(nil).
+		SetSysID(1).
+		Save(ctx)
 	if err != nil {
 		return 0, err
 	}

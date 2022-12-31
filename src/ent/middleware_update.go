@@ -28,20 +28,69 @@ func (mu *MiddlewareUpdate) Where(ps ...predicate.Middleware) *MiddlewareUpdate 
 }
 
 // SetLID sets the "l_id" field.
-func (mu *MiddlewareUpdate) SetLID(s string) *MiddlewareUpdate {
-	mu.mutation.SetLID(s)
+func (mu *MiddlewareUpdate) SetLID(i int) *MiddlewareUpdate {
+	mu.mutation.ResetLID()
+	mu.mutation.SetLID(i)
+	return mu
+}
+
+// SetNillableLID sets the "l_id" field if the given value is not nil.
+func (mu *MiddlewareUpdate) SetNillableLID(i *int) *MiddlewareUpdate {
+	if i != nil {
+		mu.SetLID(*i)
+	}
+	return mu
+}
+
+// AddLID adds i to the "l_id" field.
+func (mu *MiddlewareUpdate) AddLID(i int) *MiddlewareUpdate {
+	mu.mutation.AddLID(i)
+	return mu
+}
+
+// ClearLID clears the value of the "l_id" field.
+func (mu *MiddlewareUpdate) ClearLID() *MiddlewareUpdate {
+	mu.mutation.ClearLID()
 	return mu
 }
 
 // SetDID sets the "d_id" field.
-func (mu *MiddlewareUpdate) SetDID(s string) *MiddlewareUpdate {
-	mu.mutation.SetDID(s)
+func (mu *MiddlewareUpdate) SetDID(i int) *MiddlewareUpdate {
+	mu.mutation.ResetDID()
+	mu.mutation.SetDID(i)
+	return mu
+}
+
+// SetNillableDID sets the "d_id" field if the given value is not nil.
+func (mu *MiddlewareUpdate) SetNillableDID(i *int) *MiddlewareUpdate {
+	if i != nil {
+		mu.SetDID(*i)
+	}
+	return mu
+}
+
+// AddDID adds i to the "d_id" field.
+func (mu *MiddlewareUpdate) AddDID(i int) *MiddlewareUpdate {
+	mu.mutation.AddDID(i)
+	return mu
+}
+
+// ClearDID clears the value of the "d_id" field.
+func (mu *MiddlewareUpdate) ClearDID() *MiddlewareUpdate {
+	mu.mutation.ClearDID()
 	return mu
 }
 
 // SetSysID sets the "sys_id" field.
-func (mu *MiddlewareUpdate) SetSysID(s string) *MiddlewareUpdate {
-	mu.mutation.SetSysID(s)
+func (mu *MiddlewareUpdate) SetSysID(i int) *MiddlewareUpdate {
+	mu.mutation.ResetSysID()
+	mu.mutation.SetSysID(i)
+	return mu
+}
+
+// AddSysID adds i to the "sys_id" field.
+func (mu *MiddlewareUpdate) AddSysID(i int) *MiddlewareUpdate {
+	mu.mutation.AddSysID(i)
 	return mu
 }
 
@@ -123,13 +172,28 @@ func (mu *MiddlewareUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 	}
 	if value, ok := mu.mutation.LID(); ok {
-		_spec.SetField(middleware.FieldLID, field.TypeString, value)
+		_spec.SetField(middleware.FieldLID, field.TypeInt, value)
+	}
+	if value, ok := mu.mutation.AddedLID(); ok {
+		_spec.AddField(middleware.FieldLID, field.TypeInt, value)
+	}
+	if mu.mutation.LIDCleared() {
+		_spec.ClearField(middleware.FieldLID, field.TypeInt)
 	}
 	if value, ok := mu.mutation.DID(); ok {
-		_spec.SetField(middleware.FieldDID, field.TypeString, value)
+		_spec.SetField(middleware.FieldDID, field.TypeInt, value)
+	}
+	if value, ok := mu.mutation.AddedDID(); ok {
+		_spec.AddField(middleware.FieldDID, field.TypeInt, value)
+	}
+	if mu.mutation.DIDCleared() {
+		_spec.ClearField(middleware.FieldDID, field.TypeInt)
 	}
 	if value, ok := mu.mutation.SysID(); ok {
-		_spec.SetField(middleware.FieldSysID, field.TypeString, value)
+		_spec.SetField(middleware.FieldSysID, field.TypeInt, value)
+	}
+	if value, ok := mu.mutation.AddedSysID(); ok {
+		_spec.AddField(middleware.FieldSysID, field.TypeInt, value)
 	}
 	if n, err = sqlgraph.UpdateNodes(ctx, mu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
@@ -151,20 +215,69 @@ type MiddlewareUpdateOne struct {
 }
 
 // SetLID sets the "l_id" field.
-func (muo *MiddlewareUpdateOne) SetLID(s string) *MiddlewareUpdateOne {
-	muo.mutation.SetLID(s)
+func (muo *MiddlewareUpdateOne) SetLID(i int) *MiddlewareUpdateOne {
+	muo.mutation.ResetLID()
+	muo.mutation.SetLID(i)
+	return muo
+}
+
+// SetNillableLID sets the "l_id" field if the given value is not nil.
+func (muo *MiddlewareUpdateOne) SetNillableLID(i *int) *MiddlewareUpdateOne {
+	if i != nil {
+		muo.SetLID(*i)
+	}
+	return muo
+}
+
+// AddLID adds i to the "l_id" field.
+func (muo *MiddlewareUpdateOne) AddLID(i int) *MiddlewareUpdateOne {
+	muo.mutation.AddLID(i)
+	return muo
+}
+
+// ClearLID clears the value of the "l_id" field.
+func (muo *MiddlewareUpdateOne) ClearLID() *MiddlewareUpdateOne {
+	muo.mutation.ClearLID()
 	return muo
 }
 
 // SetDID sets the "d_id" field.
-func (muo *MiddlewareUpdateOne) SetDID(s string) *MiddlewareUpdateOne {
-	muo.mutation.SetDID(s)
+func (muo *MiddlewareUpdateOne) SetDID(i int) *MiddlewareUpdateOne {
+	muo.mutation.ResetDID()
+	muo.mutation.SetDID(i)
+	return muo
+}
+
+// SetNillableDID sets the "d_id" field if the given value is not nil.
+func (muo *MiddlewareUpdateOne) SetNillableDID(i *int) *MiddlewareUpdateOne {
+	if i != nil {
+		muo.SetDID(*i)
+	}
+	return muo
+}
+
+// AddDID adds i to the "d_id" field.
+func (muo *MiddlewareUpdateOne) AddDID(i int) *MiddlewareUpdateOne {
+	muo.mutation.AddDID(i)
+	return muo
+}
+
+// ClearDID clears the value of the "d_id" field.
+func (muo *MiddlewareUpdateOne) ClearDID() *MiddlewareUpdateOne {
+	muo.mutation.ClearDID()
 	return muo
 }
 
 // SetSysID sets the "sys_id" field.
-func (muo *MiddlewareUpdateOne) SetSysID(s string) *MiddlewareUpdateOne {
-	muo.mutation.SetSysID(s)
+func (muo *MiddlewareUpdateOne) SetSysID(i int) *MiddlewareUpdateOne {
+	muo.mutation.ResetSysID()
+	muo.mutation.SetSysID(i)
+	return muo
+}
+
+// AddSysID adds i to the "sys_id" field.
+func (muo *MiddlewareUpdateOne) AddSysID(i int) *MiddlewareUpdateOne {
+	muo.mutation.AddSysID(i)
 	return muo
 }
 
@@ -276,13 +389,28 @@ func (muo *MiddlewareUpdateOne) sqlSave(ctx context.Context) (_node *Middleware,
 		}
 	}
 	if value, ok := muo.mutation.LID(); ok {
-		_spec.SetField(middleware.FieldLID, field.TypeString, value)
+		_spec.SetField(middleware.FieldLID, field.TypeInt, value)
+	}
+	if value, ok := muo.mutation.AddedLID(); ok {
+		_spec.AddField(middleware.FieldLID, field.TypeInt, value)
+	}
+	if muo.mutation.LIDCleared() {
+		_spec.ClearField(middleware.FieldLID, field.TypeInt)
 	}
 	if value, ok := muo.mutation.DID(); ok {
-		_spec.SetField(middleware.FieldDID, field.TypeString, value)
+		_spec.SetField(middleware.FieldDID, field.TypeInt, value)
+	}
+	if value, ok := muo.mutation.AddedDID(); ok {
+		_spec.AddField(middleware.FieldDID, field.TypeInt, value)
+	}
+	if muo.mutation.DIDCleared() {
+		_spec.ClearField(middleware.FieldDID, field.TypeInt)
 	}
 	if value, ok := muo.mutation.SysID(); ok {
-		_spec.SetField(middleware.FieldSysID, field.TypeString, value)
+		_spec.SetField(middleware.FieldSysID, field.TypeInt, value)
+	}
+	if value, ok := muo.mutation.AddedSysID(); ok {
+		_spec.AddField(middleware.FieldSysID, field.TypeInt, value)
 	}
 	_node = &Middleware{config: muo.config}
 	_spec.Assign = _node.assignValues

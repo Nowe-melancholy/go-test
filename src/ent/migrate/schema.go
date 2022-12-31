@@ -11,9 +11,9 @@ var (
 	// MiddlewaresColumns holds the columns for the "middlewares" table.
 	MiddlewaresColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "l_id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "int"}},
-		{Name: "d_id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "int"}},
-		{Name: "sys_id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "int"}},
+		{Name: "l_id", Type: field.TypeInt, Nullable: true, SchemaType: map[string]string{"postgres": "int"}},
+		{Name: "d_id", Type: field.TypeInt, Nullable: true, SchemaType: map[string]string{"postgres": "int"}},
+		{Name: "sys_id", Type: field.TypeInt, SchemaType: map[string]string{"postgres": "int"}},
 	}
 	// MiddlewaresTable holds the schema information for the "middlewares" table.
 	MiddlewaresTable = &schema.Table{

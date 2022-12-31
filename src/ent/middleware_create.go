@@ -20,20 +20,36 @@ type MiddlewareCreate struct {
 }
 
 // SetLID sets the "l_id" field.
-func (mc *MiddlewareCreate) SetLID(s string) *MiddlewareCreate {
-	mc.mutation.SetLID(s)
+func (mc *MiddlewareCreate) SetLID(i int) *MiddlewareCreate {
+	mc.mutation.SetLID(i)
+	return mc
+}
+
+// SetNillableLID sets the "l_id" field if the given value is not nil.
+func (mc *MiddlewareCreate) SetNillableLID(i *int) *MiddlewareCreate {
+	if i != nil {
+		mc.SetLID(*i)
+	}
 	return mc
 }
 
 // SetDID sets the "d_id" field.
-func (mc *MiddlewareCreate) SetDID(s string) *MiddlewareCreate {
-	mc.mutation.SetDID(s)
+func (mc *MiddlewareCreate) SetDID(i int) *MiddlewareCreate {
+	mc.mutation.SetDID(i)
+	return mc
+}
+
+// SetNillableDID sets the "d_id" field if the given value is not nil.
+func (mc *MiddlewareCreate) SetNillableDID(i *int) *MiddlewareCreate {
+	if i != nil {
+		mc.SetDID(*i)
+	}
 	return mc
 }
 
 // SetSysID sets the "sys_id" field.
-func (mc *MiddlewareCreate) SetSysID(s string) *MiddlewareCreate {
-	mc.mutation.SetSysID(s)
+func (mc *MiddlewareCreate) SetSysID(i int) *MiddlewareCreate {
+	mc.mutation.SetSysID(i)
 	return mc
 }
 
@@ -113,12 +129,6 @@ func (mc *MiddlewareCreate) ExecX(ctx context.Context) {
 
 // check runs all checks and user-defined validators on the builder.
 func (mc *MiddlewareCreate) check() error {
-	if _, ok := mc.mutation.LID(); !ok {
-		return &ValidationError{Name: "l_id", err: errors.New(`ent: missing required field "Middleware.l_id"`)}
-	}
-	if _, ok := mc.mutation.DID(); !ok {
-		return &ValidationError{Name: "d_id", err: errors.New(`ent: missing required field "Middleware.d_id"`)}
-	}
 	if _, ok := mc.mutation.SysID(); !ok {
 		return &ValidationError{Name: "sys_id", err: errors.New(`ent: missing required field "Middleware.sys_id"`)}
 	}
@@ -150,15 +160,15 @@ func (mc *MiddlewareCreate) createSpec() (*Middleware, *sqlgraph.CreateSpec) {
 		}
 	)
 	if value, ok := mc.mutation.LID(); ok {
-		_spec.SetField(middleware.FieldLID, field.TypeString, value)
+		_spec.SetField(middleware.FieldLID, field.TypeInt, value)
 		_node.LID = value
 	}
 	if value, ok := mc.mutation.DID(); ok {
-		_spec.SetField(middleware.FieldDID, field.TypeString, value)
+		_spec.SetField(middleware.FieldDID, field.TypeInt, value)
 		_node.DID = value
 	}
 	if value, ok := mc.mutation.SysID(); ok {
-		_spec.SetField(middleware.FieldSysID, field.TypeString, value)
+		_spec.SetField(middleware.FieldSysID, field.TypeInt, value)
 		_node.SysID = value
 	}
 	return _node, _spec

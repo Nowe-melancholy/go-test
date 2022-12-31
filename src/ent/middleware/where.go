@@ -80,42 +80,42 @@ func IDLTE(id int) predicate.Middleware {
 }
 
 // LID applies equality check predicate on the "l_id" field. It's identical to LIDEQ.
-func LID(v string) predicate.Middleware {
+func LID(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldLID), v))
 	})
 }
 
 // DID applies equality check predicate on the "d_id" field. It's identical to DIDEQ.
-func DID(v string) predicate.Middleware {
+func DID(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldDID), v))
 	})
 }
 
 // SysID applies equality check predicate on the "sys_id" field. It's identical to SysIDEQ.
-func SysID(v string) predicate.Middleware {
+func SysID(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldSysID), v))
 	})
 }
 
 // LIDEQ applies the EQ predicate on the "l_id" field.
-func LIDEQ(v string) predicate.Middleware {
+func LIDEQ(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldLID), v))
 	})
 }
 
 // LIDNEQ applies the NEQ predicate on the "l_id" field.
-func LIDNEQ(v string) predicate.Middleware {
+func LIDNEQ(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.NEQ(s.C(FieldLID), v))
 	})
 }
 
 // LIDIn applies the In predicate on the "l_id" field.
-func LIDIn(vs ...string) predicate.Middleware {
+func LIDIn(vs ...int) predicate.Middleware {
 	v := make([]any, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -126,7 +126,7 @@ func LIDIn(vs ...string) predicate.Middleware {
 }
 
 // LIDNotIn applies the NotIn predicate on the "l_id" field.
-func LIDNotIn(vs ...string) predicate.Middleware {
+func LIDNotIn(vs ...int) predicate.Middleware {
 	v := make([]any, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -137,84 +137,63 @@ func LIDNotIn(vs ...string) predicate.Middleware {
 }
 
 // LIDGT applies the GT predicate on the "l_id" field.
-func LIDGT(v string) predicate.Middleware {
+func LIDGT(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.GT(s.C(FieldLID), v))
 	})
 }
 
 // LIDGTE applies the GTE predicate on the "l_id" field.
-func LIDGTE(v string) predicate.Middleware {
+func LIDGTE(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.GTE(s.C(FieldLID), v))
 	})
 }
 
 // LIDLT applies the LT predicate on the "l_id" field.
-func LIDLT(v string) predicate.Middleware {
+func LIDLT(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.LT(s.C(FieldLID), v))
 	})
 }
 
 // LIDLTE applies the LTE predicate on the "l_id" field.
-func LIDLTE(v string) predicate.Middleware {
+func LIDLTE(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldLID), v))
 	})
 }
 
-// LIDContains applies the Contains predicate on the "l_id" field.
-func LIDContains(v string) predicate.Middleware {
+// LIDIsNil applies the IsNil predicate on the "l_id" field.
+func LIDIsNil() predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.Contains(s.C(FieldLID), v))
+		s.Where(sql.IsNull(s.C(FieldLID)))
 	})
 }
 
-// LIDHasPrefix applies the HasPrefix predicate on the "l_id" field.
-func LIDHasPrefix(v string) predicate.Middleware {
+// LIDNotNil applies the NotNil predicate on the "l_id" field.
+func LIDNotNil() predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.HasPrefix(s.C(FieldLID), v))
-	})
-}
-
-// LIDHasSuffix applies the HasSuffix predicate on the "l_id" field.
-func LIDHasSuffix(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.HasSuffix(s.C(FieldLID), v))
-	})
-}
-
-// LIDEqualFold applies the EqualFold predicate on the "l_id" field.
-func LIDEqualFold(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.EqualFold(s.C(FieldLID), v))
-	})
-}
-
-// LIDContainsFold applies the ContainsFold predicate on the "l_id" field.
-func LIDContainsFold(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.ContainsFold(s.C(FieldLID), v))
+		s.Where(sql.NotNull(s.C(FieldLID)))
 	})
 }
 
 // DIDEQ applies the EQ predicate on the "d_id" field.
-func DIDEQ(v string) predicate.Middleware {
+func DIDEQ(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldDID), v))
 	})
 }
 
 // DIDNEQ applies the NEQ predicate on the "d_id" field.
-func DIDNEQ(v string) predicate.Middleware {
+func DIDNEQ(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.NEQ(s.C(FieldDID), v))
 	})
 }
 
 // DIDIn applies the In predicate on the "d_id" field.
-func DIDIn(vs ...string) predicate.Middleware {
+func DIDIn(vs ...int) predicate.Middleware {
 	v := make([]any, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -225,7 +204,7 @@ func DIDIn(vs ...string) predicate.Middleware {
 }
 
 // DIDNotIn applies the NotIn predicate on the "d_id" field.
-func DIDNotIn(vs ...string) predicate.Middleware {
+func DIDNotIn(vs ...int) predicate.Middleware {
 	v := make([]any, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -236,84 +215,63 @@ func DIDNotIn(vs ...string) predicate.Middleware {
 }
 
 // DIDGT applies the GT predicate on the "d_id" field.
-func DIDGT(v string) predicate.Middleware {
+func DIDGT(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.GT(s.C(FieldDID), v))
 	})
 }
 
 // DIDGTE applies the GTE predicate on the "d_id" field.
-func DIDGTE(v string) predicate.Middleware {
+func DIDGTE(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.GTE(s.C(FieldDID), v))
 	})
 }
 
 // DIDLT applies the LT predicate on the "d_id" field.
-func DIDLT(v string) predicate.Middleware {
+func DIDLT(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.LT(s.C(FieldDID), v))
 	})
 }
 
 // DIDLTE applies the LTE predicate on the "d_id" field.
-func DIDLTE(v string) predicate.Middleware {
+func DIDLTE(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldDID), v))
 	})
 }
 
-// DIDContains applies the Contains predicate on the "d_id" field.
-func DIDContains(v string) predicate.Middleware {
+// DIDIsNil applies the IsNil predicate on the "d_id" field.
+func DIDIsNil() predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.Contains(s.C(FieldDID), v))
+		s.Where(sql.IsNull(s.C(FieldDID)))
 	})
 }
 
-// DIDHasPrefix applies the HasPrefix predicate on the "d_id" field.
-func DIDHasPrefix(v string) predicate.Middleware {
+// DIDNotNil applies the NotNil predicate on the "d_id" field.
+func DIDNotNil() predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.HasPrefix(s.C(FieldDID), v))
-	})
-}
-
-// DIDHasSuffix applies the HasSuffix predicate on the "d_id" field.
-func DIDHasSuffix(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.HasSuffix(s.C(FieldDID), v))
-	})
-}
-
-// DIDEqualFold applies the EqualFold predicate on the "d_id" field.
-func DIDEqualFold(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.EqualFold(s.C(FieldDID), v))
-	})
-}
-
-// DIDContainsFold applies the ContainsFold predicate on the "d_id" field.
-func DIDContainsFold(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.ContainsFold(s.C(FieldDID), v))
+		s.Where(sql.NotNull(s.C(FieldDID)))
 	})
 }
 
 // SysIDEQ applies the EQ predicate on the "sys_id" field.
-func SysIDEQ(v string) predicate.Middleware {
+func SysIDEQ(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldSysID), v))
 	})
 }
 
 // SysIDNEQ applies the NEQ predicate on the "sys_id" field.
-func SysIDNEQ(v string) predicate.Middleware {
+func SysIDNEQ(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.NEQ(s.C(FieldSysID), v))
 	})
 }
 
 // SysIDIn applies the In predicate on the "sys_id" field.
-func SysIDIn(vs ...string) predicate.Middleware {
+func SysIDIn(vs ...int) predicate.Middleware {
 	v := make([]any, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -324,7 +282,7 @@ func SysIDIn(vs ...string) predicate.Middleware {
 }
 
 // SysIDNotIn applies the NotIn predicate on the "sys_id" field.
-func SysIDNotIn(vs ...string) predicate.Middleware {
+func SysIDNotIn(vs ...int) predicate.Middleware {
 	v := make([]any, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -335,65 +293,30 @@ func SysIDNotIn(vs ...string) predicate.Middleware {
 }
 
 // SysIDGT applies the GT predicate on the "sys_id" field.
-func SysIDGT(v string) predicate.Middleware {
+func SysIDGT(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.GT(s.C(FieldSysID), v))
 	})
 }
 
 // SysIDGTE applies the GTE predicate on the "sys_id" field.
-func SysIDGTE(v string) predicate.Middleware {
+func SysIDGTE(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.GTE(s.C(FieldSysID), v))
 	})
 }
 
 // SysIDLT applies the LT predicate on the "sys_id" field.
-func SysIDLT(v string) predicate.Middleware {
+func SysIDLT(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.LT(s.C(FieldSysID), v))
 	})
 }
 
 // SysIDLTE applies the LTE predicate on the "sys_id" field.
-func SysIDLTE(v string) predicate.Middleware {
+func SysIDLTE(v int) predicate.Middleware {
 	return predicate.Middleware(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldSysID), v))
-	})
-}
-
-// SysIDContains applies the Contains predicate on the "sys_id" field.
-func SysIDContains(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.Contains(s.C(FieldSysID), v))
-	})
-}
-
-// SysIDHasPrefix applies the HasPrefix predicate on the "sys_id" field.
-func SysIDHasPrefix(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.HasPrefix(s.C(FieldSysID), v))
-	})
-}
-
-// SysIDHasSuffix applies the HasSuffix predicate on the "sys_id" field.
-func SysIDHasSuffix(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.HasSuffix(s.C(FieldSysID), v))
-	})
-}
-
-// SysIDEqualFold applies the EqualFold predicate on the "sys_id" field.
-func SysIDEqualFold(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.EqualFold(s.C(FieldSysID), v))
-	})
-}
-
-// SysIDContainsFold applies the ContainsFold predicate on the "sys_id" field.
-func SysIDContainsFold(v string) predicate.Middleware {
-	return predicate.Middleware(func(s *sql.Selector) {
-		s.Where(sql.ContainsFold(s.C(FieldSysID), v))
 	})
 }
 

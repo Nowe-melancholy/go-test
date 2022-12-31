@@ -14,15 +14,15 @@ type Middleware struct {
 // Fields of the Middleware.
 func (Middleware) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("l_id").
+		field.Int("l_id").
 			SchemaType(map[string]string{
 				dialect.Postgres: "int",
-			}),
-		field.String("d_id").
+			}).Optional(),
+		field.Int("d_id").
 			SchemaType(map[string]string{
 				dialect.Postgres: "int",
-			}),
-		field.String("sys_id").
+			}).Optional(),
+		field.Int("sys_id").
 			SchemaType(map[string]string{
 				dialect.Postgres: "int",
 			}),

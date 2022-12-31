@@ -253,7 +253,7 @@ func (mq *MiddlewareQuery) Clone() *MiddlewareQuery {
 // Example:
 //
 //	var v []struct {
-//		LID string `json:"l_id,omitempty"`
+//		LID int `json:"l_id,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
@@ -281,7 +281,7 @@ func (mq *MiddlewareQuery) GroupBy(field string, fields ...string) *MiddlewareGr
 // Example:
 //
 //	var v []struct {
-//		LID string `json:"l_id,omitempty"`
+//		LID int `json:"l_id,omitempty"`
 //	}
 //
 //	client.Middleware.Query().

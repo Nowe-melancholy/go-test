@@ -31,9 +31,12 @@ type MiddlewareMutation struct {
 	op            Op
 	typ           string
 	id            *int
-	l_id          *string
-	d_id          *string
-	sys_id        *string
+	l_id          *int
+	addl_id       *int
+	d_id          *int
+	addd_id       *int
+	sys_id        *int
+	addsys_id     *int
 	clearedFields map[string]struct{}
 	done          bool
 	oldValue      func(context.Context) (*Middleware, error)
@@ -139,12 +142,13 @@ func (m *MiddlewareMutation) IDs(ctx context.Context) ([]int, error) {
 }
 
 // SetLID sets the "l_id" field.
-func (m *MiddlewareMutation) SetLID(s string) {
-	m.l_id = &s
+func (m *MiddlewareMutation) SetLID(i int) {
+	m.l_id = &i
+	m.addl_id = nil
 }
 
 // LID returns the value of the "l_id" field in the mutation.
-func (m *MiddlewareMutation) LID() (r string, exists bool) {
+func (m *MiddlewareMutation) LID() (r int, exists bool) {
 	v := m.l_id
 	if v == nil {
 		return
@@ -155,7 +159,7 @@ func (m *MiddlewareMutation) LID() (r string, exists bool) {
 // OldLID returns the old "l_id" field's value of the Middleware entity.
 // If the Middleware object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *MiddlewareMutation) OldLID(ctx context.Context) (v string, err error) {
+func (m *MiddlewareMutation) OldLID(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldLID is only allowed on UpdateOne operations")
 	}
@@ -169,18 +173,52 @@ func (m *MiddlewareMutation) OldLID(ctx context.Context) (v string, err error) {
 	return oldValue.LID, nil
 }
 
+// AddLID adds i to the "l_id" field.
+func (m *MiddlewareMutation) AddLID(i int) {
+	if m.addl_id != nil {
+		*m.addl_id += i
+	} else {
+		m.addl_id = &i
+	}
+}
+
+// AddedLID returns the value that was added to the "l_id" field in this mutation.
+func (m *MiddlewareMutation) AddedLID() (r int, exists bool) {
+	v := m.addl_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearLID clears the value of the "l_id" field.
+func (m *MiddlewareMutation) ClearLID() {
+	m.l_id = nil
+	m.addl_id = nil
+	m.clearedFields[middleware.FieldLID] = struct{}{}
+}
+
+// LIDCleared returns if the "l_id" field was cleared in this mutation.
+func (m *MiddlewareMutation) LIDCleared() bool {
+	_, ok := m.clearedFields[middleware.FieldLID]
+	return ok
+}
+
 // ResetLID resets all changes to the "l_id" field.
 func (m *MiddlewareMutation) ResetLID() {
 	m.l_id = nil
+	m.addl_id = nil
+	delete(m.clearedFields, middleware.FieldLID)
 }
 
 // SetDID sets the "d_id" field.
-func (m *MiddlewareMutation) SetDID(s string) {
-	m.d_id = &s
+func (m *MiddlewareMutation) SetDID(i int) {
+	m.d_id = &i
+	m.addd_id = nil
 }
 
 // DID returns the value of the "d_id" field in the mutation.
-func (m *MiddlewareMutation) DID() (r string, exists bool) {
+func (m *MiddlewareMutation) DID() (r int, exists bool) {
 	v := m.d_id
 	if v == nil {
 		return
@@ -191,7 +229,7 @@ func (m *MiddlewareMutation) DID() (r string, exists bool) {
 // OldDID returns the old "d_id" field's value of the Middleware entity.
 // If the Middleware object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *MiddlewareMutation) OldDID(ctx context.Context) (v string, err error) {
+func (m *MiddlewareMutation) OldDID(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldDID is only allowed on UpdateOne operations")
 	}
@@ -205,18 +243,52 @@ func (m *MiddlewareMutation) OldDID(ctx context.Context) (v string, err error) {
 	return oldValue.DID, nil
 }
 
+// AddDID adds i to the "d_id" field.
+func (m *MiddlewareMutation) AddDID(i int) {
+	if m.addd_id != nil {
+		*m.addd_id += i
+	} else {
+		m.addd_id = &i
+	}
+}
+
+// AddedDID returns the value that was added to the "d_id" field in this mutation.
+func (m *MiddlewareMutation) AddedDID() (r int, exists bool) {
+	v := m.addd_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearDID clears the value of the "d_id" field.
+func (m *MiddlewareMutation) ClearDID() {
+	m.d_id = nil
+	m.addd_id = nil
+	m.clearedFields[middleware.FieldDID] = struct{}{}
+}
+
+// DIDCleared returns if the "d_id" field was cleared in this mutation.
+func (m *MiddlewareMutation) DIDCleared() bool {
+	_, ok := m.clearedFields[middleware.FieldDID]
+	return ok
+}
+
 // ResetDID resets all changes to the "d_id" field.
 func (m *MiddlewareMutation) ResetDID() {
 	m.d_id = nil
+	m.addd_id = nil
+	delete(m.clearedFields, middleware.FieldDID)
 }
 
 // SetSysID sets the "sys_id" field.
-func (m *MiddlewareMutation) SetSysID(s string) {
-	m.sys_id = &s
+func (m *MiddlewareMutation) SetSysID(i int) {
+	m.sys_id = &i
+	m.addsys_id = nil
 }
 
 // SysID returns the value of the "sys_id" field in the mutation.
-func (m *MiddlewareMutation) SysID() (r string, exists bool) {
+func (m *MiddlewareMutation) SysID() (r int, exists bool) {
 	v := m.sys_id
 	if v == nil {
 		return
@@ -227,7 +299,7 @@ func (m *MiddlewareMutation) SysID() (r string, exists bool) {
 // OldSysID returns the old "sys_id" field's value of the Middleware entity.
 // If the Middleware object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *MiddlewareMutation) OldSysID(ctx context.Context) (v string, err error) {
+func (m *MiddlewareMutation) OldSysID(ctx context.Context) (v int, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldSysID is only allowed on UpdateOne operations")
 	}
@@ -241,9 +313,28 @@ func (m *MiddlewareMutation) OldSysID(ctx context.Context) (v string, err error)
 	return oldValue.SysID, nil
 }
 
+// AddSysID adds i to the "sys_id" field.
+func (m *MiddlewareMutation) AddSysID(i int) {
+	if m.addsys_id != nil {
+		*m.addsys_id += i
+	} else {
+		m.addsys_id = &i
+	}
+}
+
+// AddedSysID returns the value that was added to the "sys_id" field in this mutation.
+func (m *MiddlewareMutation) AddedSysID() (r int, exists bool) {
+	v := m.addsys_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
 // ResetSysID resets all changes to the "sys_id" field.
 func (m *MiddlewareMutation) ResetSysID() {
 	m.sys_id = nil
+	m.addsys_id = nil
 }
 
 // Where appends a list predicates to the MiddlewareMutation builder.
@@ -314,21 +405,21 @@ func (m *MiddlewareMutation) OldField(ctx context.Context, name string) (ent.Val
 func (m *MiddlewareMutation) SetField(name string, value ent.Value) error {
 	switch name {
 	case middleware.FieldLID:
-		v, ok := value.(string)
+		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetLID(v)
 		return nil
 	case middleware.FieldDID:
-		v, ok := value.(string)
+		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetDID(v)
 		return nil
 	case middleware.FieldSysID:
-		v, ok := value.(string)
+		v, ok := value.(int)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -341,13 +432,31 @@ func (m *MiddlewareMutation) SetField(name string, value ent.Value) error {
 // AddedFields returns all numeric fields that were incremented/decremented during
 // this mutation.
 func (m *MiddlewareMutation) AddedFields() []string {
-	return nil
+	var fields []string
+	if m.addl_id != nil {
+		fields = append(fields, middleware.FieldLID)
+	}
+	if m.addd_id != nil {
+		fields = append(fields, middleware.FieldDID)
+	}
+	if m.addsys_id != nil {
+		fields = append(fields, middleware.FieldSysID)
+	}
+	return fields
 }
 
 // AddedField returns the numeric value that was incremented/decremented on a field
 // with the given name. The second boolean return value indicates that this field
 // was not set, or was not defined in the schema.
 func (m *MiddlewareMutation) AddedField(name string) (ent.Value, bool) {
+	switch name {
+	case middleware.FieldLID:
+		return m.AddedLID()
+	case middleware.FieldDID:
+		return m.AddedDID()
+	case middleware.FieldSysID:
+		return m.AddedSysID()
+	}
 	return nil, false
 }
 
@@ -356,6 +465,27 @@ func (m *MiddlewareMutation) AddedField(name string) (ent.Value, bool) {
 // type.
 func (m *MiddlewareMutation) AddField(name string, value ent.Value) error {
 	switch name {
+	case middleware.FieldLID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddLID(v)
+		return nil
+	case middleware.FieldDID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddDID(v)
+		return nil
+	case middleware.FieldSysID:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddSysID(v)
+		return nil
 	}
 	return fmt.Errorf("unknown Middleware numeric field %s", name)
 }
@@ -363,7 +493,14 @@ func (m *MiddlewareMutation) AddField(name string, value ent.Value) error {
 // ClearedFields returns all nullable fields that were cleared during this
 // mutation.
 func (m *MiddlewareMutation) ClearedFields() []string {
-	return nil
+	var fields []string
+	if m.FieldCleared(middleware.FieldLID) {
+		fields = append(fields, middleware.FieldLID)
+	}
+	if m.FieldCleared(middleware.FieldDID) {
+		fields = append(fields, middleware.FieldDID)
+	}
+	return fields
 }
 
 // FieldCleared returns a boolean indicating if a field with the given name was
@@ -376,6 +513,14 @@ func (m *MiddlewareMutation) FieldCleared(name string) bool {
 // ClearField clears the value of the field with the given name. It returns an
 // error if the field is not defined in the schema.
 func (m *MiddlewareMutation) ClearField(name string) error {
+	switch name {
+	case middleware.FieldLID:
+		m.ClearLID()
+		return nil
+	case middleware.FieldDID:
+		m.ClearDID()
+		return nil
+	}
 	return fmt.Errorf("unknown Middleware nullable field %s", name)
 }
 

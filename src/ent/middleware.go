@@ -16,11 +16,11 @@ type Middleware struct {
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
 	// LID holds the value of the "l_id" field.
-	LID string `json:"l_id,omitempty"`
+	LID int `json:"l_id,omitempty"`
 	// DID holds the value of the "d_id" field.
-	DID string `json:"d_id,omitempty"`
+	DID int `json:"d_id,omitempty"`
 	// SysID holds the value of the "sys_id" field.
-	SysID string `json:"sys_id,omitempty"`
+	SysID int `json:"sys_id,omitempty"`
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -28,10 +28,8 @@ func (*Middleware) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case middleware.FieldID:
+		case middleware.FieldID, middleware.FieldLID, middleware.FieldDID, middleware.FieldSysID:
 			values[i] = new(sql.NullInt64)
-		case middleware.FieldLID, middleware.FieldDID, middleware.FieldSysID:
-			values[i] = new(sql.NullString)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type Middleware", columns[i])
 		}
@@ -54,22 +52,22 @@ func (m *Middleware) assignValues(columns []string, values []any) error {
 			}
 			m.ID = int(value.Int64)
 		case middleware.FieldLID:
-			if value, ok := values[i].(*sql.NullString); !ok {
+			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field l_id", values[i])
 			} else if value.Valid {
-				m.LID = value.String
+				m.LID = int(value.Int64)
 			}
 		case middleware.FieldDID:
-			if value, ok := values[i].(*sql.NullString); !ok {
+			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field d_id", values[i])
 			} else if value.Valid {
-				m.DID = value.String
+				m.DID = int(value.Int64)
 			}
 		case middleware.FieldSysID:
-			if value, ok := values[i].(*sql.NullString); !ok {
+			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field sys_id", values[i])
 			} else if value.Valid {
-				m.SysID = value.String
+				m.SysID = int(value.Int64)
 			}
 		}
 	}
@@ -100,13 +98,13 @@ func (m *Middleware) String() string {
 	builder.WriteString("Middleware(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", m.ID))
 	builder.WriteString("l_id=")
-	builder.WriteString(m.LID)
+	builder.WriteString(fmt.Sprintf("%v", m.LID))
 	builder.WriteString(", ")
 	builder.WriteString("d_id=")
-	builder.WriteString(m.DID)
+	builder.WriteString(fmt.Sprintf("%v", m.DID))
 	builder.WriteString(", ")
 	builder.WriteString("sys_id=")
-	builder.WriteString(m.SysID)
+	builder.WriteString(fmt.Sprintf("%v", m.SysID))
 	builder.WriteByte(')')
 	return builder.String()
 }
