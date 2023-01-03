@@ -9,6 +9,7 @@ import (
 
 	"go-test/graph"
 	generated "go-test/graph"
+	controller "go-test/presenter"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -33,6 +34,8 @@ func main() {
 		graphqlHandler.ServeHTTP(c.Response(), c.Request())
 		return nil
 	})
+
+	e.POST("/middleware/create", controller.CreateD)
 
 	e.GET("/playground", func(c echo.Context) error {
 		playgroundHander.ServeHTTP(c.Response(), c.Request())

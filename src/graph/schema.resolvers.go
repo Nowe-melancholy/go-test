@@ -8,7 +8,7 @@ import (
 	"context"
 	"go-test/graph/model"
 	middlewareRepo "go-test/repos"
-	createLUsecase "go-test/usecase"
+	createLUsecase "go-test/usecase/createL"
 )
 
 // CreateL is the resolver for the createL field.

@@ -36,3 +36,25 @@ func (repo *middlewareRepo) CreateL(ctx context.Context, lId int) (int, error) {
 
 	return middleware.ID, nil
 }
+
+func (repo *middlewareRepo) CreateD(ctx context.Context, dId int) (int, error) {
+	client, err := ent.Open("postgres", fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=disable",
+		"db", "5432", "db", "root", "root"))
+
+	if err != nil {
+		return 0, err
+	}
+
+	defer client.Close()
+	middleware, err := client.Debug().Middleware.
+		Create().
+		SetDID(dId).
+		SetNillableLID(nil).
+		SetSysID(2).
+		Save(ctx)
+	if err != nil {
+		return 0, err
+	}
+
+	return middleware.ID, nil
+}
